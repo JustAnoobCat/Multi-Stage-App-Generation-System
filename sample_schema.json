@@ -1,0 +1,396 @@
+{
+  "ui_schema": {
+    "components": [
+      {
+        "id": "login-form",
+        "type": "form",
+        "props": {
+          "username": "string",
+          "password": "string"
+        },
+        "page": "Login"
+      },
+      {
+        "id": "register-form",
+        "type": "form",
+        "props": {
+          "username": "string",
+          "password": "string",
+          "email": "string"
+        },
+        "page": "Register"
+      },
+      {
+        "id": "dashboard-chart",
+        "type": "chart",
+        "props": {
+          "data": "array"
+        },
+        "page": "Dashboard"
+      },
+      {
+        "id": "dashboard-table",
+        "type": "table",
+        "props": {
+          "data": "array"
+        },
+        "page": "Dashboard"
+      },
+      {
+        "id": "contact-list",
+        "type": "list",
+        "props": {
+          "data": "array"
+        },
+        "page": "Contact Management"
+      },
+      {
+        "id": "contact-form",
+        "type": "form",
+        "props": {
+          "name": "string",
+          "email": "string",
+          "phone": "string"
+        },
+        "page": "Contact Management"
+      },
+      {
+        "id": "pricing-table",
+        "type": "table",
+        "props": {
+          "data": "array"
+        },
+        "page": "Pricing"
+      },
+      {
+        "id": "payment-form",
+        "type": "form",
+        "props": {
+          "amount": "number",
+          "paymentMethod": "string"
+        },
+        "page": "Payment"
+      }
+    ]
+  },
+  "api_schema": {
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/subscriptions",
+        "auth": true,
+        "roles": [
+          "Admin",
+          "User"
+        ],
+        "request_body": {
+          "plain_id": "string"
+        },
+        "response": {
+          "subscription_id": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/login",
+        "auth": false,
+        "roles": [],
+        "request_body": {
+          "username": "string",
+          "password": "string"
+        },
+        "response": {
+          "token": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/register",
+        "auth": false,
+        "roles": [],
+        "request_body": {
+          "username": "string",
+          "password": "string",
+          "email": "string"
+        },
+        "response": {
+          "token": "string"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/dashboard",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales",
+          "customer Support"
+        ],
+        "request_body": {},
+        "response": {
+          "data": "array"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/contacts",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales",
+          "customer Support"
+        ],
+        "request_body": {},
+        "response": {
+          "data": "array"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/contacts",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales"
+        ],
+        "request_body": {
+          "name": "string",
+          "email": "string",
+          "phone": "string"
+        },
+        "response": {
+          "id": "number"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/pricing",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales",
+          "customer Support"
+        ],
+        "request_body": {},
+        "response": {
+          "data": "array"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/payment",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales"
+        ],
+        "request_body": {
+          "amount": "number",
+          "paymentMethod": "string"
+        },
+        "response": {
+          "id": "number"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/invoices",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales"
+        ],
+        "request_body": {},
+        "response": {
+          "data": "array"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/payments",
+        "auth": true,
+        "roles": [
+          "admin",
+          "sales"
+        ],
+        "request_body": {},
+        "response": {
+          "data": "array"
+        }
+      }
+    ]
+  },
+  "db_schema": {
+    "tables": [
+      {
+        "name": "users",
+        "columns": [
+          {
+            "name": "id",
+            "type": "number",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "username",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "password",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          }
+        ],
+        "relations": []
+      },
+      {
+        "name": "contacts",
+        "columns": [
+          {
+            "name": "id",
+            "type": "number",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          }
+        ],
+        "relations": []
+      },
+      {
+        "name": "invoices",
+        "columns": [
+          {
+            "name": "id",
+            "type": "number",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "nullable": false,
+            "unique": false
+          },
+          {
+            "name": "paymentMethod",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          }
+        ],
+        "relations": []
+      },
+      {
+        "name": "payments",
+        "columns": [
+          {
+            "name": "id",
+            "type": "number",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "nullable": false,
+            "unique": false
+          },
+          {
+            "name": "paymentMethod",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          }
+        ],
+        "relations": []
+      },
+      {
+        "name": "subscriptions",
+        "columns": [
+          {
+            "name": "id",
+            "type": "number",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "userId",
+            "type": "number",
+            "nullable": false,
+            "unique": false
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "nullable": false,
+            "unique": false
+          }
+        ],
+        "relations": [
+          "users"
+        ]
+      }
+    ]
+  },
+  "auth_schema": {
+    "strategy": "session-based",
+    "roles": [
+      "admin",
+      "sales",
+      "customer Support"
+    ],
+    "permissions": {
+      "admin": {
+        "can": [
+          "access dashboard",
+          "manage contacts",
+          "process payments"
+        ]
+      },
+      "sales": {
+        "can": [
+          "access dashboard",
+          "manage contacts"
+        ]
+      },
+      "customer Support": {
+        "can": [
+          "access dashboard",
+          "view contacts"
+        ]
+      }
+    }
+  }
+}

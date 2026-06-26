@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Invoice{% endblock %}
+{% block content %}
+<h1>Invoice</h1>
+<table>
+<thead><tr>
+<th>id</th>
+<th>name</th>
+</tr></thead>
+<tbody id="invoice_list"></tbody>
+</table>
+<form>
+<input type="text" name="{'name': 'date', 'type': 'date'}" placeholder="{'name': 'date', 'type': 'date'}"><br>
+<input type="text" name="{'name': 'total', 'type': 'number'}" placeholder="{'name': 'total', 'type': 'number'}"><br>
+<button type="submit">Submit</button>
+</form>
+{% endblock %}
